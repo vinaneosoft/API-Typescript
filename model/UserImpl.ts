@@ -11,10 +11,10 @@ export async function  getAllUsers():Promise<any>{
     
 }
 
-/*  async function getUserById(id){
+export async function getUserById(id:number){
     return await UserModel.findOne({_id:id}).populate("address").exec();
 }
-
+/* 
  async function addUser(args){
     // save / create
     const  UserDoc=new UserModel();
