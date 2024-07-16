@@ -11,7 +11,7 @@ export async function getUserById(id:number){
     return await UserModel.findOne({_id:id}).populate("address").exec();
 }
 
- export async function addUser(args:any){
+ /* export async function addUser(args:any){
     // save / create
     const  UserDoc=new UserModel();
     const AddressDoc=new AddressModel();
@@ -54,3 +54,4 @@ export async function deleteUserById(id:number){
 
 
 
+ */

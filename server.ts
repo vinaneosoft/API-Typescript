@@ -16,10 +16,10 @@ app.all(
       schema:userschema
     })
   );
-/*   
- app.get("/", (_req, res) => {
+  
+/*  app.get("/", (_req, res) => {
     res.type("html")
     res.end(ruruHTML({ endpoint: "/graphql" }))
-  })  */  
+  })   */
 app.listen(PORT)
 console.log("Running a GraphQL API server at http://localhost:4600")

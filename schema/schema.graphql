@@ -25,20 +25,14 @@ input UserInput {
     phone:String!
     address:AddressInput!
 }
-interface Error{
-    message:String
-}
-type IsNotAvailable implements Error{
-    message:String
-    _id:Int
-}
 
 type Query{
     fetchUsers: [User]
     getUser(_id:Int!):User 
 }
-type Mutation{
-    addUser(user:UserInput): User
-    deleteUser(_id:Int!):User
-    updateUser(user:UserInput):User
-}
+
+# type Mutation{
+    #addUser(user:UserInput):User
+    #deleteUser(_id:Int):User
+    #updateUser(user:UserInput):User
+#} 
