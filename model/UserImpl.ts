@@ -2,6 +2,9 @@
 import {UserModel} from "./UserModel";
 import {AddressModel} from "./AddressModel";
 
+import { User } from "../pojo/User";
+import { Address } from "../pojo/Address";
+
 export async function  getAllUsers(){
     const res= await UserModel.find({}).populate("address").exec();
     return res;
@@ -11,10 +14,11 @@ export async function getUserById(id:number){
     return await UserModel.findOne({_id:id}).populate("address").exec();
 }
 
- export async function addUser(user:any){
+ export async function addUser(user:User){
     // save / create
-    const  UserDoc=new UserModel();
-    const AddressDoc=new AddressModel();
+    let  UserDoc=new UserModel();
+    let  AddressDoc=new AddressModel();
+    //AddressDoc=user.address;
     AddressDoc._id=user.address._id;
     AddressDoc.area=user.address.area;
     AddressDoc.city=user.address.city;
@@ -26,8 +30,7 @@ export async function getUserById(id:number){
     UserDoc.phone=user.phone;
     UserDoc.address=<any>AddressDoc;
     const add=await AddressDoc.save();
-    user= await UserDoc.save();
-    return user;
+    return  await UserDoc.save();
 }
  /*
 export async function updateUser(args:any){

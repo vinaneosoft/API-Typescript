@@ -3,7 +3,7 @@ type Address {
     _id: Int!
     area: String!
     city: String!
-    pincode:Int!
+    pincode:String!
 }
 type User {
     _id: Int!

@@ -1,6 +1,6 @@
 import { Address } from "./Address";
 
-class User{
+export class User{
     constructor(
         public _id=0, 
         public name="", 
