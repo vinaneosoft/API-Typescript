@@ -12,8 +12,8 @@ export const resolvers ={
       getUser : async(parent:any, args:any, context:any)=>{
         // console.log(args._id);
          const res=await getUserById(args._id);
-         if(res==null)
-            throw new Error("USER NOT FOUND");
+         /* if(res==null)
+            throw new Error("USER NOT FOUND"); */
          return res;
       }
    },
@@ -27,14 +27,14 @@ export const resolvers ={
       deleteUser : async(parent:any, args:any, context:any)=>{
           //console.log(args);
           const res=await deleteUserById(args._id);
-          if(res==false)
-            throw new UserNotFoundException("No User Found with given id to delete")
+         /*  if(res==false)
+            throw new UserNotFoundException("No User Found with given id to delete") */
           return res;
       },
       updateUser : async(parent:any, args:any, context:any)=>{
-          console.log(args);
+         // console.log(args);
           const res=await updateUser(args.user);
-          console.log(res)
+        //  console.log(res)
           return res;
        }
    }
