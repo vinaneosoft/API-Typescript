@@ -31,8 +31,8 @@ type Query{
     getUser(_id:Int!):User 
 }
 
-# type Mutation{
-    #addUser(user:UserInput):User
+type Mutation{
+    addUser(user:UserInput):User
     #deleteUser(_id:Int):User
     #updateUser(user:UserInput):User
-#} 
+} 

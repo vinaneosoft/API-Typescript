@@ -11,25 +11,25 @@ export async function getUserById(id:number){
     return await UserModel.findOne({_id:id}).populate("address").exec();
 }
 
- /* export async function addUser(args:any){
+ export async function addUser(user:any){
     // save / create
     const  UserDoc=new UserModel();
     const AddressDoc=new AddressModel();
-    AddressDoc._id=args.address._id;
-    AddressDoc.area=args.address.area;
-    AddressDoc.city=args.address.city;
-    AddressDoc.pincode=args.address.pincode; 
+    AddressDoc._id=user.address._id;
+    AddressDoc.area=user.address.area;
+    AddressDoc.city=user.address.city;
+    AddressDoc.pincode=user.address.pincode; 
 
-    UserDoc._id=args._id;
-    UserDoc.name=args.name;
-    UserDoc.email=args.email;
-    UserDoc.phone=args.phone;
+    UserDoc._id=user._id;
+    UserDoc.name=user.name;
+    UserDoc.email=user.email;
+    UserDoc.phone=user.phone;
     (<unknown>UserDoc.address)=<unknown>AddressDoc;
     const add=await AddressDoc.save();
-    const user= await UserDoc.save();
+    user= await UserDoc.save();
     return user;
 }
-
+ /*
 export async function updateUser(args:any){
     const filter= {_id:args._id};
     const update ={ name :args.name, email : args.email, phone: args.phone};
