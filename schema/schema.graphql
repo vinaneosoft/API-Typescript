@@ -1,9 +1,9 @@
 
 type Address {
-    _id: Int!
-    area: String!
-    city: String!
-    pincode:String!
+    _id: Int
+    area: String
+    city: String
+    pincode:String
 }
 type User {
     _id: Int!
@@ -34,5 +34,5 @@ type Query{
 type Mutation{
     addUser(user:UserInput):User
     #deleteUser(_id:Int):User
-    #updateUser(user:UserInput):User
+    updateUser(user:UserInput):User
 } 

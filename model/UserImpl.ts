@@ -16,37 +16,32 @@ export async function getUserById(id:number){
 
  export async function addUser(user:User){
     // save / create
-    let  UserDoc=new UserModel();
-    let  AddressDoc=new AddressModel();
+    let  AddressDoc=new AddressModel(user.address);
+    let  UserDoc=new UserModel(user);
     console.log(typeof AddressDoc);
-   // AddressDoc=<any>user.address;
-    AddressDoc._id=user.address._id;
-    AddressDoc.area=user.address.area;
-    AddressDoc.city=user.address.city;
-    AddressDoc.pincode=user.address.pincode; 
-
-    UserDoc._id=user._id;
-    UserDoc.name=user.name;
-    UserDoc.email=user.email;
-    UserDoc.phone=user.phone;
     UserDoc.address=<any>AddressDoc; // User has Address
     const add=await AddressDoc.save();
-    return  await UserDoc.save();
-}
- /*
-export async function updateUser(args:any){
-    const filter= {_id:args._id};
-    const update ={ name :args.name, email : args.email, phone: args.phone};
-    const filter2= {_id:args.address._id}
-    const update2 ={city :args.address.city, 
-        area : args.address.area, 
-        pincode: args.address.pincode};
-     const AddressDoc=await AddressModel.findOneAndUpdate(filter2,update2, {new:true});
-     const UserDoc=await UserModel.findOneAndUpdate(filter,update, {new:true});
-     (<unknown>UserDoc!.address)=<unknown>AddressDoc;
-     return UserDoc;
+    return  await UserDoc.save(); // User + Address
 }
 
+export async function updateUser(user:User){
+    console.log("in function...");
+    
+    const filter= {_id:user._id};
+    const update ={ name :user.name, email : user.email, phone: user.phone};
+    const filter2= {_id:user.address._id}
+    const update2 ={city :user.address.city, area : user.address.area, pincode: user.address.pincode};
+    const UserDoc=await UserModel.findOneAndUpdate(filter,update, {new:true});
+    if(UserDoc!=null){
+        let AddressDoc=await AddressModel.findOneAndUpdate(filter2,update2, {new:true});
+         /*if(AddressDoc==null){
+            AddressDoc = new AddressModel(AddressModel.findOne({_id:UserDoc._id}).exec());
+        } */
+        UserDoc!.address=<any>AddressDoc; 
+    }
+    return UserDoc;
+}
+ /*
 export async function deleteUserById(id:number){
     const user=await UserModel.findOne({_id:id})
     if(user==null)
