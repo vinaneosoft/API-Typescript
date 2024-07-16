@@ -3,7 +3,7 @@ import {UserModel} from "./UserModel";
 import {AddressModel} from "./AddressModel";
 
 import { User } from "../pojo/User";
-import { Address } from "../pojo/Address";
+
 
 export async function  getAllUsers(){
     const res= await UserModel.find({}).populate("address").exec();
@@ -18,7 +18,8 @@ export async function getUserById(id:number){
     // save / create
     let  UserDoc=new UserModel();
     let  AddressDoc=new AddressModel();
-    //AddressDoc=user.address;
+    console.log(typeof AddressDoc);
+   // AddressDoc=<any>user.address;
     AddressDoc._id=user.address._id;
     AddressDoc.area=user.address.area;
     AddressDoc.city=user.address.city;
@@ -28,7 +29,7 @@ export async function getUserById(id:number){
     UserDoc.name=user.name;
     UserDoc.email=user.email;
     UserDoc.phone=user.phone;
-    UserDoc.address=<any>AddressDoc;
+    UserDoc.address=<any>AddressDoc; // User has Address
     const add=await AddressDoc.save();
     return  await UserDoc.save();
 }
