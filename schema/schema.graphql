@@ -5,14 +5,40 @@ type Address {
     city: String!
     pincode:Int!
 }
- type User {
+type User {
+    _id: Int!
+    name: String!
+    email: String!
+    phone:String
+    address:Address
+}
+input AddressInput{
+     _id: Int!
+    area: String!
+    city: String!
+    pincode:Int!
+}
+input UserInput {
     _id: Int!
     name: String!
     email: String!
     phone:String!
-    address:Address
+    address:AddressInput!
 }
+interface Error{
+    message:String
+}
+type IsNotAvailable implements Error{
+    message:String
+    _id:Int
+}
+
 type Query{
-    getUsers: [User]
-    getUser(_id:Int!):User
+    fetchUsers: [User]
+    getUser(_id:Int!):User 
+}
+type Mutation{
+    addUser(user:UserInput): User
+    deleteUser(_id:Int!):User
+    updateUser(user:UserInput):User
 }

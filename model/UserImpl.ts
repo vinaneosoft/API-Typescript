@@ -1,21 +1,17 @@
 
 import {UserModel} from "./UserModel";
-//import {AddressModel} from "./AddressModel";
+import {AddressModel} from "./AddressModel";
 
-export async function  getAllUsers():Promise<any>{
-    console.log("in getAll");
-    
+export async function  getAllUsers(){
     const res= await UserModel.find({}).populate("address").exec();
-    console.log(res)
     return res;
-    
 }
 
 export async function getUserById(id:number){
     return await UserModel.findOne({_id:id}).populate("address").exec();
 }
-/* 
- async function addUser(args){
+
+ export async function addUser(args:any){
     // save / create
     const  UserDoc=new UserModel();
     const AddressDoc=new AddressModel();
@@ -28,12 +24,13 @@ export async function getUserById(id:number){
     UserDoc.name=args.name;
     UserDoc.email=args.email;
     UserDoc.phone=args.phone;
-    UserDoc.address=AddressDoc;//
+    (<unknown>UserDoc.address)=<unknown>AddressDoc;
     const add=await AddressDoc.save();
     const user= await UserDoc.save();
     return user;
 }
-async function updateUser(args){
+
+export async function updateUser(args:any){
     const filter= {_id:args._id};
     const update ={ name :args.name, email : args.email, phone: args.phone};
     const filter2= {_id:args.address._id}
@@ -42,16 +39,18 @@ async function updateUser(args){
         pincode: args.address.pincode};
      const AddressDoc=await AddressModel.findOneAndUpdate(filter2,update2, {new:true});
      const UserDoc=await UserModel.findOneAndUpdate(filter,update, {new:true});
-     UserDoc.address=AddressDoc;
+     (<unknown>UserDoc!.address)=<unknown>AddressDoc;
      return UserDoc;
 }
 
-async function deleteUserById(id){
+export async function deleteUserById(id:number){
     const user=await UserModel.findOne({_id:id})
+    if(user==null)
+        return false
     const addid=user.address;
     await UserModel.deleteOne({_id:id});
-    return await AddressModel.deleteOne({_id:addid});
+    return user;
 }
 
- */
+
 
