@@ -24,7 +24,7 @@ export async function getUserById(id:number){
     UserDoc.name=user.name;
     UserDoc.email=user.email;
     UserDoc.phone=user.phone;
-    (<unknown>UserDoc.address)=<unknown>AddressDoc;
+    UserDoc.address=<any>AddressDoc;
     const add=await AddressDoc.save();
     user= await UserDoc.save();
     return user;
