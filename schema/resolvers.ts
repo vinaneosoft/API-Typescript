@@ -29,7 +29,7 @@ export const resolvers ={
       updateUser : async(parent:any, args:any, context:any)=>{
           const res=await updateUser(args.user);
           if(res==null)
-            throw new UserNotFoundException(`User with id ${args.user._id} Not Found`)
+            throw new UserNotFoundException(`User with id ${args.user._id} Not Found`, 304)
          else if(res.address==null)
             throw new GraphQLError("Address Not Found for Updating");
           return res;
