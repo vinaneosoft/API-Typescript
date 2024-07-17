@@ -12,7 +12,7 @@ export const resolvers ={
       getUser : async(parent:any, args:any, context:any)=>{
          const res=await getUserById(args._id);
          if(res==null)
-               throw new GraphQLError("User Not Found");
+               throw new UserNotFoundException(`User with id ${args._id} Not Found`)
          return res;
       }
    },
@@ -29,7 +29,7 @@ export const resolvers ={
       updateUser : async(parent:any, args:any, context:any)=>{
           const res=await updateUser(args.user);
           if(res==null)
-            throw new GraphQLError("User Not Found for Updating");
+            throw new UserNotFoundException(`User with id ${args.user._id} Not Found`)
          else if(res.address==null)
             throw new GraphQLError("Address Not Found for Updating");
           return res;

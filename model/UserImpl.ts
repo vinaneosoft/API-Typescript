@@ -25,12 +25,13 @@ export async function getUserById(id:number){
 }
 
 export async function updateUser(user:User){
-    console.log("in function...");
     
+
     const filter= {_id:user._id};
     const update=user;
     const filter2= {_id:user.address._id}
     const update2 =user.address
+
     const UserDoc=await UserModel.findOneAndUpdate(filter,update, {new:true});
     if(UserDoc!=null){
         let AddressDoc=await AddressModel.findOneAndUpdate(filter2,update2, {new:true});
