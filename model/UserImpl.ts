@@ -44,10 +44,11 @@ export async function updateUser(user:User){
 }
 
 export async function deleteUserById(id:number){
-    const user=await UserModel.findOne({_id:id})
+    const user=await UserModel.findOne({_id:id}).populate("address").exec();
     if(user!=null){
         const addid=user.address;
         await UserModel.deleteOne({_id:id});
+        await AddressModel.deleteOne({_id:addid});
     }
     return user;
 }
