@@ -42,16 +42,15 @@ export async function updateUser(user:User){
     }
     return UserDoc;
 }
- /*
+
 export async function deleteUserById(id:number){
     const user=await UserModel.findOne({_id:id})
-    if(user==null)
-        return false
-    const addid=user.address;
-    await UserModel.deleteOne({_id:id});
+    if(user!=null){
+        const addid=user.address;
+        await UserModel.deleteOne({_id:id});
+    }
     return user;
 }
 
 
 
- */
