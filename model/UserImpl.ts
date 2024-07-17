@@ -28,9 +28,9 @@ export async function updateUser(user:User){
     console.log("in function...");
     
     const filter= {_id:user._id};
-    const update ={ name :user.name, email : user.email, phone: user.phone};
+    const update=user;
     const filter2= {_id:user.address._id}
-    const update2 ={city :user.address.city, area : user.address.area, pincode: user.address.pincode};
+    const update2 =user.address
     const UserDoc=await UserModel.findOneAndUpdate(filter,update, {new:true});
     if(UserDoc!=null){
         let AddressDoc=await AddressModel.findOneAndUpdate(filter2,update2, {new:true});
