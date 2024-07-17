@@ -1,15 +1,15 @@
 import { GraphQLError } from "graphql";
 
 export class UserNotFoundException extends GraphQLError {
-    status="ERROR";
+    statusText="ERROR";
     message:string;
     extensions :{}
-    constructor(message?:string, code?:number){
+    constructor(message?:string, status?:number){
         super(message || "Not Found");
         this.message=message || "NOT FOUND"
         this.extensions={
-            code:code || 301,
-            status : this.status
+            status:status || 500,
+            statusText : this.statusText
         }
     }
 }
