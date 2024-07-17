@@ -4,11 +4,11 @@ export class UserNotFoundException extends GraphQLError {
     statusText="ERROR";
     message:string;
     extensions :{}
-    constructor(message?:string, status?:number){
-        super(message || "Not Found");
-        this.message=message || "NOT FOUND"
+    constructor(message="NOT FOUND", status=500){
+        super(message);
+        this.message=message
         this.extensions={
-            status:status || 500,
+            status:status,
             statusText : this.statusText
         }
     }

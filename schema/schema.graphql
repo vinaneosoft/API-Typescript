@@ -33,6 +33,6 @@ type Query{
 
 type Mutation{
     addUser(user:UserInput):User
-    #deleteUser(_id:Int):User
+    deleteUser(_id:Int):User
     updateUser(user:UserInput):User
 } 

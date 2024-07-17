@@ -1,7 +1,7 @@
 
 import { GraphQLError } from "graphql";
 import { UserNotFoundException } from "../exceptions/UserNotFoundException";
-import {getAllUsers, getUserById, addUser, updateUser} from "../model/UserImpl";
+import {getAllUsers, getUserById, addUser, updateUser, deleteUserById} from "../model/UserImpl";
  
 export const resolvers ={
    Query:{
@@ -22,10 +22,12 @@ export const resolvers ={
          const res=await addUser(args.user);
          return res;
       },
-     /*  deleteUser : async(parent:any, args:any, context:any)=>{
+      deleteUser : async(parent:any, args:any, context:any)=>{
           const res=await deleteUserById(args._id);
+          if(res==null)
+            throw new UserNotFoundException(`User with id ${args._id} Not Found`)
           return res;
-      },*/
+      },
       updateUser : async(parent:any, args:any, context:any)=>{
           const res=await updateUser(args.user);
           if(res==null)
